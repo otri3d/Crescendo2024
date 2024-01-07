@@ -31,4 +31,11 @@ public final class Constants {
     public static final int ENCODERDIO1 = 9;
     public static final int ENCODERDIO2 = 10;
   }
+
+  public static class PCMConstants{
+    public static final int LEFTINPUTPORT = 0;
+    public static final int RIGHTINPUTPORT = 1;
+    public static final int LEFTOUTPUTPORT = 2;
+    public static final int RIGHTOUTPUTPORT= 3;
+  }
 }
