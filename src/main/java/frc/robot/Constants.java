@@ -19,6 +19,10 @@ public final class Constants {
     public static final int MOTORCONTROLPORT2 = 2;
     public static final int MOTORCONTROLPORT3 = 3;
     public static final int MOTORCONTROLPORT4 = 4;
+    public static final int LEFTINPUTPORT = 0;
+    public static final int RIGHTINPUTPORT = 1;
+    public static final int LEFTOUTPUTPORT = 2;
+    public static final int RIGHTOUTPUTPORT = 3;
   }
   public static class DriveConstants {
     public static final double ACCELERATION_CONSTANT = 0.0;
