@@ -24,9 +24,7 @@ public class IntakeRetractCommand extends CommandBase{
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if(m_controller.getAButtonPressed()){
-            m_subsystem.setIntakePosition(0);
-        }
+        m_subsystem.setIntakePosition(0);
     }
 
     // Called once the command ends or is interrupted.

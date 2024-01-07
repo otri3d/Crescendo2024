@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeExtendCommand;
+import frc.robot.commands.IntakeRetractCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -29,6 +30,7 @@ public class RobotContainer {
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   JoystickButton yButton;
+  JoystickButton aButton;
 
   private static XboxController driver;
 
@@ -43,8 +45,11 @@ public class RobotContainer {
     configureBindings();
     driver = new XboxController(OperatorConstants.DRIVER1CONTROLLERPORT);
     CommandScheduler.getInstance().setDefaultCommand(m_driveSubsystem, new DefaultDriveCommand(m_driveSubsystem));
-    yButton = new JoystickButton(driver, 1);
-    yButton.onTrue(new IntakeExtendCommand(m_intakeSubsystem));
+    yButton = new JoystickButton(driver, XboxController.Button.kY.value);
+    aButton = new JoystickButton(driver, XboxController.Button.kA.value);
+
+    yButton.onTrue(new IntakeExtendCommand(m_intakeSubsystem)); 
+    aButton.onTrue(new IntakeRetractCommand(m_intakeSubsystem));
   }
 
   /**

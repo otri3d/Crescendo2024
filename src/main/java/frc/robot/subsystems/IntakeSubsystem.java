@@ -75,7 +75,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    setIntakePosition(0);
   }
 
   @Override

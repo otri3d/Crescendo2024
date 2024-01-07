@@ -1,5 +1,12 @@
 {
   "HALProvider": {
+    "Encoders": {
+      "0": {
+        "header": {
+          "open": true
+        }
+      }
+    },
     "Other Devices": {
       "Victor SPX[1]": {
         "header": {
