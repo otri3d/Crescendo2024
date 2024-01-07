@@ -6,10 +6,25 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import frc.robot.Constants.OperatorConstants;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
-public class ExampleSubsystem extends SubsystemBase {
+public class DriveSubsystem extends SubsystemBase {
+  private WPI_VictorSPX m_left1, m_left2, m_right1, m_right2;
+  private MotorControllerGroup m_left, m_right;
   /** Creates a new ExampleSubsystem. */
-  public ExampleSubsystem() {}
+  public DriveSubsystem() {
+    m_left1 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT1);
+    m_left2 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT2);
+    m_right1 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT3);
+    m_right2 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT4);
+
+    m_left = new MotorControllerGroup(m_left1, m_left2);
+    m_right = new MotorControllerGroup(m_right1, m_right2);
+  }
 
   /**
    * Example command factory method.
@@ -23,6 +38,14 @@ public class ExampleSubsystem extends SubsystemBase {
         () -> {
           /* one-time action goes here */
         });
+  }
+
+  public void setLeftSpeed(double speed) {
+    m_left.set(speed);
+  }
+
+  public void setRightSpeed(double speed) {
+    m_right.set(speed);
   }
 
   /**

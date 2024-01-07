@@ -4,24 +4,31 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 
 /** An example command that uses an example subsystem. */
-public class ExampleCommand extends CommandBase {
+public class DefaultDriveCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ExampleSubsystem m_subsystem;
+  private final DriveSubsystem m_subsystem;
+  private final XboxController m_controller = RobotContainer.getDriverController();
+  private boolean modeSwitch = false;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ExampleCommand(ExampleSubsystem subsystem) {
+  public DefaultDriveCommand(DriveSubsystem subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
+    
   }
+  
 
   // Called when the command is initially scheduled.
   @Override
@@ -29,7 +36,19 @@ public class ExampleCommand extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    if(m_controller.getAButton()){
+      modeSwitch = !modeSwitch;
+    }
+    if(!modeSwitch){
+      m_subsystem.setLeftSpeed(-m_controller.getLeftY());
+      m_subsystem.setRightSpeed(-m_controller.getRightY());
+    }
+    else{
+      m_subsystem.setLeftSpeed(-1*(m_controller.getLeftY()+m_controller.getLeftX()));
+      m_subsystem.setRightSpeed(-1*(m_controller.getLeftY()-m_controller.getLeftX()));
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
