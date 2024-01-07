@@ -37,18 +37,18 @@ public class DefaultDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_controller.getAButton()){
+    if(m_controller.getXButtonPressed()){
       modeSwitch = !modeSwitch;
     }
     if(!modeSwitch){
       m_subsystem.setLeftSpeed(-m_controller.getLeftY());
-      m_subsystem.setRightSpeed(-m_controller.getRightY());
+      m_subsystem.setRightSpeed(m_controller.getRightY());
     }
     else{
-      //m_subsystem.setLeftSpeed(-1*(m_controller.getLeftY()+m_controller.getLeftX()));
-      //m_subsystem.setRightSpeed(-1*(m_controller.getLeftY()-m_controller.getLeftX()));
-      m_subsystem.setAcceleratingLeftMotors(m_controller.getLeftY());
-      m_subsystem.setAcceleratingRightMotors(m_controller.getRightY());
+      m_subsystem.setAcceleratingLeftMotors(1*(m_controller.getLeftY()+m_controller.getLeftX()));
+      m_subsystem.setAcceleratingRightMotors(-1*(m_controller.getLeftY()-m_controller.getLeftX()));
+      // m_subsystem.setAcceleratingLeftMotors(m_controller.getLeftY());
+      // m_subsystem.setAcceleratingRightMotors(m_controller.getRightY());
     }
   }
 

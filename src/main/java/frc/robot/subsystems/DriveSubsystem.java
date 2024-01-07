@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 public class DriveSubsystem extends SubsystemBase {
   private WPI_VictorSPX m_left1, m_left2, m_right1, m_right2;
   private MotorControllerGroup m_left, m_right;
-  private double m_speed = 0.0;
+  private double m_speed1 = 0.0, m_speed2 = 0.0;
   /** Creates a new ExampleSubsystem. */
   public DriveSubsystem() {
     m_left1 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT1);
@@ -51,18 +51,16 @@ public class DriveSubsystem extends SubsystemBase {
     
   }
   public void setAcceleratingLeftMotors(double leftStickInput)
-  {   
-    if(MathUtil.applyDeadband(leftStickInput,0.01 ) == 0) {m_speed = 0;}
-    m_speed += leftStickInput*DriveConstants.ACCELERATION_CONSTANT;
-    System.out.println(m_speed);
-    m_left.set(MathUtil.clamp(m_speed,-1.0,1.0));
+  {
+    if(MathUtil.applyDeadband(leftStickInput,0.01 ) == 0) {m_speed1 = 0;}
+    m_speed1 += leftStickInput*DriveConstants.ACCELERATION_CONSTANT;
+    m_left.set(MathUtil.clamp(m_speed1,-1.0,1.0)*-1);
    }
   public void setAcceleratingRightMotors(double rightStickInput)
   {  
-    if(MathUtil.applyDeadband(rightStickInput,0.01 ) == 0) {m_speed = 0;}
-    m_speed += rightStickInput*DriveConstants.ACCELERATION_CONSTANT;
-    System.out.println(m_speed);
-    m_right.set(MathUtil.clamp(m_speed,-1.0,1.0));
+    if(MathUtil.applyDeadband(rightStickInput,0.01 ) == 0) {m_speed2 = 0;}
+    m_speed2 += rightStickInput*DriveConstants.ACCELERATION_CONSTANT;
+    m_right.set(MathUtil.clamp(m_speed2,-1.0,1.0));
   }
 
   /**
