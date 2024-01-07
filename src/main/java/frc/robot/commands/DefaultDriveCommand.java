@@ -45,8 +45,10 @@ public class DefaultDriveCommand extends CommandBase {
       m_subsystem.setRightSpeed(-m_controller.getRightY());
     }
     else{
-      m_subsystem.setLeftSpeed(-1*(m_controller.getLeftY()+m_controller.getLeftX()));
-      m_subsystem.setRightSpeed(-1*(m_controller.getLeftY()-m_controller.getLeftX()));
+      //m_subsystem.setLeftSpeed(-1*(m_controller.getLeftY()+m_controller.getLeftX()));
+      //m_subsystem.setRightSpeed(-1*(m_controller.getLeftY()-m_controller.getLeftX()));
+      m_subsystem.setAcceleratingLeftMotors(m_controller.getLeftY());
+      m_subsystem.setAcceleratingRightMotors(m_controller.getRightY());
     }
   }
 

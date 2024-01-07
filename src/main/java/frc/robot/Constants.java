@@ -20,4 +20,7 @@ public final class Constants {
     public static final int MOTORCONTROLPORT3 = 3;
     public static final int MOTORCONTROLPORT4 = 4;
   }
+  public static class DriveConstants {
+    public static final double ACCELERATION_CONSTANT = 0.0;
+  }
 }
