@@ -7,12 +7,16 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DefaultDriveCommand;
+import frc.robot.commands.IntakeExtendCommand;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.IntakeExtendCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -23,6 +27,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  JoystickButton yButton;
 
   private static XboxController driver;
 
@@ -37,7 +43,8 @@ public class RobotContainer {
     configureBindings();
     driver = new XboxController(OperatorConstants.DRIVER1CONTROLLERPORT);
     CommandScheduler.getInstance().setDefaultCommand(m_driveSubsystem, new DefaultDriveCommand(m_driveSubsystem));
-    
+    yButton = new JoystickButton(driver, 1);
+    yButton.onTrue(new IntakeExtendCommand(m_intakeSubsystem));
   }
 
   /**
@@ -56,7 +63,7 @@ public class RobotContainer {
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_driverController.b().whileTrue(m_driveSubsystem.exampleMethodCommand());
+    m_driverController.y().whileTrue(m_driveSubsystem.exampleMethodCommand());
   }
   
 

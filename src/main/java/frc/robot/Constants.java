@@ -27,4 +27,8 @@ public final class Constants {
   public static class DriveConstants {
     public static final double ACCELERATION_CONSTANT = 0.04  ;
   }
+  public static class InputConstants {
+    public static final int ENCODERDIO1 = 9;
+    public static final int ENCODERDIO2 = 10;
+  }
 }

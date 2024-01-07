@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class DefaultIntakeCommand extends CommandBase{
+public class IntakeExtendCommand extends CommandBase{
     private final IntakeSubsystem m_subsystem;
     private final XboxController m_controller = RobotContainer.getDriverController();
 
-    public DefaultIntakeCommand(IntakeSubsystem subsystem) {
+    public IntakeExtendCommand(IntakeSubsystem subsystem) {
         m_subsystem = subsystem;
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
@@ -22,7 +22,9 @@ public class DefaultIntakeCommand extends CommandBase{
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-
+      if(m_controller.getYButtonPressed()){
+        m_subsystem.setIntakePosition(100);
+      }      
     }
 
     // Called once the command ends or is interrupted.
