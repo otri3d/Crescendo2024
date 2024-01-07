@@ -17,15 +17,16 @@ import frc.robot.Constants.InputConstants;
 public class IntakeSubsystem extends SubsystemBase {
 
     private WPI_VictorSPX m_intakearm1, m_intakearm2, m_gripper;
-    private MotorControllerGroup m_intakearms = new MotorControllerGroup(m_intakearm1,m_intakearm2);
+    private MotorControllerGroup m_intake;
     private DigitalInput upper_limit, lower_limit;
-    private Encoder encoder = new Encoder(InputConstants.ENCODERDIO1, InputConstants.ENCODERDIO2, false, Encoder.EncodingType.k2X);
-
+    private Encoder encoder;
   /** Creates a new ExampleSubsystem. */
     public IntakeSubsystem(){
         m_intakearm1 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT5);
         m_intakearm2 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT6);
+        m_intake = new MotorControllerGroup(m_intakearm1,m_intakearm2);
         m_gripper = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT7);
+        encoder = new Encoder(InputConstants.ENCODERDIO1, InputConstants.ENCODERDIO2, false, Encoder.EncodingType.k2X);
     }
 
   /**
@@ -41,12 +42,7 @@ public class IntakeSubsystem extends SubsystemBase {
           /* one-time action goes here */
         });
   }
-  public void setIntakeArmVelocity(double controllerInput){
-    m_intakearms.set(controllerInput);
-    if(encoder.get() == 0){
-
-    }
-  }
+  
 
   public void toggleGripperVelocty(){
     if(encoder.get() != 0){
@@ -55,6 +51,17 @@ public class IntakeSubsystem extends SubsystemBase {
     if(encoder.get() == 0){
         m_gripper.set(1);
     }    
+  }
+  public void setIntakePosition(double position){
+    if(encoder.getDistance() == position){
+      m_intake.set(0);
+    } 
+    else if(encoder.getDistance() < position){
+      m_intake.set(1);
+    } 
+    else if(encoder.getDistance() > position){
+      m_intake.set(-1);
+    }
   }
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
