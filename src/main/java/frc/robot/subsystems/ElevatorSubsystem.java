@@ -1,23 +1,14 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import frc.robot.Constants.OperatorConstants;
 
 public class ElevatorSubsystem extends SubsystemBase {
     private Solenoid m_leftIn, m_leftOut, m_rightIn, m_rightOut;
-    private final Compressor m_compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-    //private WPI_VictorSPX m_elevatorLeft, m_elevatorRight;
-    //private MotorControllerGroup m_elevator;
-
 
     public ElevatorSubsystem(){
         //Solenoid
@@ -37,7 +28,21 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     //TODO: Actuate the Solenoid, input on, output off
 
+    public void actuate(){
+        m_leftIn.set(true);
+        m_rightIn.set(true);
+        m_leftOut.set(false);
+        m_rightOut.set(false);     
+    }
+
     //TODO: Release Solenoid input off, output on
+
+    public void release(){
+        m_leftIn.set(false);
+        m_rightIn.set(false);
+        m_leftOut.set(true);
+        m_rightOut.set(true);   
+    }
 
      public Command exampleMethodCommand() {
     // Inline construction of command goes here.
