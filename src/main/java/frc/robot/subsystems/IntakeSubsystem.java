@@ -76,6 +76,7 @@ public class IntakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     setIntakePosition(0);
+    encoder.reset();
   }
 
   @Override
