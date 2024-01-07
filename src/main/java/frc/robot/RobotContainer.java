@@ -8,11 +8,15 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DefaultDriveCommand;
 import frc.robot.commands.IntakeExtendCommand;
+import frc.robot.commands.ActuateElevatorCommand;
+import frc.robot.commands.ReleaseElevatorCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeExtendCommand;
@@ -31,8 +35,11 @@ public class RobotContainer {
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   JoystickButton yButton;
   JoystickButton aButton;
+  private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
 
   private static XboxController driver;
+  private static JoystickButton lButton;
+  private static JoystickButton rButton;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -45,11 +52,15 @@ public class RobotContainer {
     configureBindings();
     driver = new XboxController(OperatorConstants.DRIVER1CONTROLLERPORT);
     CommandScheduler.getInstance().setDefaultCommand(m_driveSubsystem, new DefaultDriveCommand(m_driveSubsystem));
+    lButton = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+    rButton = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
     yButton = new JoystickButton(driver, XboxController.Button.kY.value);
     aButton = new JoystickButton(driver, XboxController.Button.kA.value);
 
     yButton.onTrue(new IntakeExtendCommand(m_intakeSubsystem)); 
     aButton.onTrue(new IntakeRetractCommand(m_intakeSubsystem));
+    lButton.onTrue(new ActuateElevatorCommand(m_elevatorSubsystem));
+    rButton.onTrue(new ReleaseElevatorCommand(m_elevatorSubsystem));
   }
 
   /**
@@ -75,10 +86,7 @@ public class RobotContainer {
   public static XboxController getDriverController() {
     return driver;
   }
-
   
-
-
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
