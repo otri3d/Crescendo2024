@@ -6,14 +6,19 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.ConveyorCommand;
 import frc.robot.commands.DefaultDriveCommand;
+import frc.robot.commands.FlywheelCommand;
+import frc.robot.commands.FlywheelDisableCommand;
 import frc.robot.commands.IntakeExtendCommand;
 import frc.robot.commands.ActuateElevatorCommand;
 import frc.robot.commands.ReleaseElevatorCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -34,12 +39,15 @@ public class RobotContainer {
   public static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   public static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   public static final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+  public static final ShooterSubsystem m_shootersubsystem = new ShooterSubsystem();
 
   private static CommandXboxController  driver;
   private static Trigger lButton;
   private static Trigger rButton;
   private static Trigger aButton;
   private static Trigger yButton; 
+  private static Trigger rtrigger;
+
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -56,11 +64,15 @@ public class RobotContainer {
     rButton = driver.rightBumper().whileTrue(new ReleaseElevatorCommand(m_elevatorSubsystem));
     yButton = driver.y().whileTrue(new IntakeExtendCommand(m_intakeSubsystem));
     aButton = driver.y().whileTrue(new IntakeExtendCommand(m_intakeSubsystem));
+    rtrigger = driver.rightTrigger(0.5).whileTrue(new FlywheelCommand(m_shootersubsystem));
 
+    
     yButton.onTrue(new IntakeExtendCommand(m_intakeSubsystem)); 
     aButton.onTrue(new IntakeRetractCommand(m_intakeSubsystem));
     lButton.onTrue(new ActuateElevatorCommand(m_elevatorSubsystem));
     rButton.onTrue(new ReleaseElevatorCommand(m_elevatorSubsystem));
+    rtrigger.onTrue(new FlywheelCommand(m_shootersubsystem));
+    rtrigger.onFalse(new FlywheelDisableCommand(m_shootersubsystem));
   }
 
   /**

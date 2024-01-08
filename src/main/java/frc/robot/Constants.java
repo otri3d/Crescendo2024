@@ -27,6 +27,8 @@ public final class Constants {
     public static final int RIGHTINPUTPORT = 2;
     public static final int LEFTOUTPUTPORT = 3;
     public static final int RIGHTOUTPUTPORT = 4;
+    public static final int RIGHTFLYWHEEL = 9;
+    public static final int LEFTFLYWHEEL = 10;
   }
   public static class DriveConstants {
     public static final double ACCELERATION_CONSTANT = 0.04  ;
