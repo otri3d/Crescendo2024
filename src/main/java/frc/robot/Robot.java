@@ -7,7 +7,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.*;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -18,7 +20,9 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-
+  private DriveSubsystem m_driveSubsystem = RobotContainer.m_driveSubsystem;
+  private IntakeSubsystem m_intakeSubsystem = RobotContainer.m_intakeSubsystem;
+  
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -27,7 +31,13 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+
     m_robotContainer = new RobotContainer();
+    m_intakeSubsystem.getEncoder().reset();
+    m_intakeSubsystem.getEncoder().setDistancePerPulse(1.0/2048.0);
+    m_intakeSubsystem.setIntakePosition(0);
+    m_driveSubsystem.setLeftSpeed(0);
+    m_driveSubsystem.setRightSpeed(0);
   }
 
   /**

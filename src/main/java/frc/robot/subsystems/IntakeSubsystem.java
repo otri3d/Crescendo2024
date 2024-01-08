@@ -63,6 +63,10 @@ public class IntakeSubsystem extends SubsystemBase {
       m_intake.set(-1);
     }
   }
+
+  public Encoder getEncoder(){
+    return encoder;
+  }
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
    *
@@ -75,8 +79,6 @@ public class IntakeSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    setIntakePosition(0);
-    encoder.reset();
   }
 
   @Override

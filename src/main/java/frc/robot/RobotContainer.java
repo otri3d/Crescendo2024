@@ -31,11 +31,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
-  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  public static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+  public static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   JoystickButton yButton;
   JoystickButton aButton;
-  private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+  public static final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
 
   private static XboxController driver;
   private static JoystickButton lButton;
