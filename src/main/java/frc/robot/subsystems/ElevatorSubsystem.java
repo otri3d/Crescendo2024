@@ -5,17 +5,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
-import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.PCMConstants;
 
 public class ElevatorSubsystem extends SubsystemBase {
     private Solenoid m_leftIn, m_leftOut, m_rightIn, m_rightOut;
 
     public ElevatorSubsystem(){
         //Solenoid
-        m_leftIn = new Solenoid(PneumaticsModuleType.CTREPCM, OperatorConstants.LEFTINPUTPORT);
-        m_rightIn = new Solenoid(PneumaticsModuleType.CTREPCM,OperatorConstants.RIGHTINPUTPORT);
-        m_leftOut = new Solenoid(PneumaticsModuleType.CTREPCM, OperatorConstants.LEFTOUTPUTPORT);
-        m_rightOut = new Solenoid(PneumaticsModuleType.CTREPCM, OperatorConstants.RIGHTOUTPUTPORT);
+        m_leftIn = new Solenoid(PneumaticsModuleType.CTREPCM, PCMConstants.LEFTINPUTPORT);
+        m_rightIn = new Solenoid(PneumaticsModuleType.CTREPCM,PCMConstants.RIGHTINPUTPORT);
+        m_leftOut = new Solenoid(PneumaticsModuleType.CTREPCM, PCMConstants.LEFTOUTPUTPORT);
+        m_rightOut = new Solenoid(PneumaticsModuleType.CTREPCM, PCMConstants.RIGHTOUTPUTPORT);
 
         //Default Config
         m_leftIn.set(false);
