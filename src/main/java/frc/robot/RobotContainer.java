@@ -33,13 +33,13 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   public static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-  JoystickButton yButton;
-  JoystickButton aButton;
   public static final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
 
-  private static XboxController driver;
-  private static JoystickButton lButton;
-  private static JoystickButton rButton;
+  private static CommandXboxController  driver;
+  private static Trigger lButton;
+  private static Trigger rButton;
+  private static Trigger aButton;
+  private static Trigger yButton; 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -50,12 +50,12 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    driver = new XboxController(OperatorConstants.DRIVER1CONTROLLERPORT);
+    driver = new CommandXboxController(OperatorConstants.DRIVER1CONTROLLERPORT);
     CommandScheduler.getInstance().setDefaultCommand(m_driveSubsystem, new DefaultDriveCommand(m_driveSubsystem));
-    lButton = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
-    rButton = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
-    yButton = new JoystickButton(driver, XboxController.Button.kY.value);
-    aButton = new JoystickButton(driver, XboxController.Button.kA.value);
+    lButton = driver.leftBumper().whileTrue(new ActuateElevatorCommand(m_elevatorSubsystem));
+    rButton = driver.rightBumper().whileTrue(new ReleaseElevatorCommand(m_elevatorSubsystem));
+    yButton = driver.y().whileTrue(new IntakeExtendCommand(m_intakeSubsystem));
+    aButton = driver.y().whileTrue(new IntakeExtendCommand(m_intakeSubsystem));
 
     yButton.onTrue(new IntakeExtendCommand(m_intakeSubsystem)); 
     aButton.onTrue(new IntakeRetractCommand(m_intakeSubsystem));
@@ -83,7 +83,7 @@ public class RobotContainer {
   }
   
 
-  public static XboxController getDriverController() {
+  public static CommandXboxController getDriverController() {
     return driver;
   }
   

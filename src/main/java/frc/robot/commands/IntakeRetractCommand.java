@@ -3,11 +3,12 @@ package frc.robot.commands;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.RobotContainer;
 
 public class IntakeRetractCommand extends CommandBase{
     private final IntakeSubsystem m_subsystem;
-    private final XboxController m_controller = RobotContainer.getDriverController();
+    private final CommandXboxController m_controller = RobotContainer.getDriverController();
 
     public IntakeRetractCommand(IntakeSubsystem subsystem) {
         m_subsystem = subsystem;
