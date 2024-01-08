@@ -40,6 +40,7 @@ public class RobotContainer {
   private static XboxController driver;
   private static JoystickButton lButton;
   private static JoystickButton rButton;
+  private static JoystickButton lTrigger;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -56,6 +57,7 @@ public class RobotContainer {
     rButton = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
     yButton = new JoystickButton(driver, XboxController.Button.kY.value);
     aButton = new JoystickButton(driver, XboxController.Button.kA.value);
+    lTrigger = new JoystickButton(driver, XboxController.Button.);
 
     yButton.onTrue(new IntakeExtendCommand(m_intakeSubsystem)); 
     aButton.onTrue(new IntakeRetractCommand(m_intakeSubsystem));
