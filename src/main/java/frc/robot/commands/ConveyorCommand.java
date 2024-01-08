@@ -7,7 +7,7 @@ public class ConveyorCommand extends CommandBase{
     private final ShooterSubsystem m_subsystem;
     /** Creates a new ConveyorCommand. */
   public ConveyorCommand(ShooterSubsystem subsystem) {
-    m_subsystem =subsystem;
+    m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }

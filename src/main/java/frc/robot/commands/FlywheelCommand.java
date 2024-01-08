@@ -2,8 +2,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.RobotContainer;
-import edu.wpi.first.wpilibj.XboxController;
 
 public class FlywheelCommand extends CommandBase{
     private final ShooterSubsystem m_subsystem;

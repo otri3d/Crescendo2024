@@ -17,16 +17,11 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.IntakeExtendCommand;
 import frc.robot.commands.IntakeRetractCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -60,13 +55,13 @@ public class RobotContainer {
     configureBindings();
     driver = new CommandXboxController(OperatorConstants.DRIVER1CONTROLLERPORT);
     CommandScheduler.getInstance().setDefaultCommand(m_driveSubsystem, new DefaultDriveCommand(m_driveSubsystem));
+
     lButton = driver.leftBumper().whileTrue(new ActuateElevatorCommand(m_elevatorSubsystem));
     rButton = driver.rightBumper().whileTrue(new ReleaseElevatorCommand(m_elevatorSubsystem));
     yButton = driver.y().whileTrue(new IntakeExtendCommand(m_intakeSubsystem));
-    aButton = driver.y().whileTrue(new IntakeExtendCommand(m_intakeSubsystem));
+    aButton = driver.a().whileTrue(new IntakeExtendCommand(m_intakeSubsystem));
     rtrigger = driver.rightTrigger(0.5).whileTrue(new FlywheelCommand(m_shootersubsystem));
 
-    
     yButton.onTrue(new IntakeExtendCommand(m_intakeSubsystem)); 
     aButton.onTrue(new IntakeRetractCommand(m_intakeSubsystem));
     lButton.onTrue(new ActuateElevatorCommand(m_elevatorSubsystem));
