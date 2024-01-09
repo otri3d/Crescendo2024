@@ -2,48 +2,59 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
-import frc.robot.Constants.PCMConstants;
+import frc.robot.Constants;
+
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class ElevatorSubsystem extends SubsystemBase {
-    private Solenoid m_leftIn, m_leftOut, m_rightIn, m_rightOut;
+    // private Solenoid m_leftIn, m_leftOut, m_rightIn, m_rightOut;
+    private WPI_VictorSPX m_elevatorMotor1, m_elevatorMotor2;
+    private MotorControllerGroup m_elevatorGroup;
 
     public ElevatorSubsystem(){
         //Solenoid
-        m_leftIn = new Solenoid(PneumaticsModuleType.CTREPCM, PCMConstants.LEFTINPUTPORT);
-        m_rightIn = new Solenoid(PneumaticsModuleType.CTREPCM,PCMConstants.RIGHTINPUTPORT);
-        m_leftOut = new Solenoid(PneumaticsModuleType.CTREPCM, PCMConstants.LEFTOUTPUTPORT);
-        m_rightOut = new Solenoid(PneumaticsModuleType.CTREPCM, PCMConstants.RIGHTOUTPUTPORT);
-
-        //Default Config
-        m_leftIn.set(false);
-        m_rightIn.set(false);
-        m_leftOut.set(true);
-        m_rightOut.set(true);
+        // m_leftIn = new Solenoid(PneumaticsModuleType.CTREPCM, PCMConstants.LEFTINPUTPORT);
+        // m_rightIn = new Solenoid(PneumaticsModuleType.CTREPCM,PCMConstants.RIGHTINPUTPORT);
+        // m_leftOut = new Solenoid(PneumaticsModuleType.CTREPCM, PCMConstants.LEFTOUTPUTPORT);
+        // m_rightOut = new Solenoid(PneumaticsModuleType.CTREPCM, PCMConstants.RIGHTOUTPUTPORT);
+        m_elevatorMotor1 = new WPI_VictorSPX(Constants.OperatorConstants.MOTORCONTROLPORT7);
+        m_elevatorMotor2 = new WPI_VictorSPX(Constants.OperatorConstants.MOTORCONTROLPORT8);
+        m_elevatorGroup = new MotorControllerGroup(m_elevatorMotor1, m_elevatorMotor2);
     }
 
     //4 single ones on each side, Default input off, output on
 
     //TODO: Actuate the Solenoid, input on, output off
 
-    public void actuate(){
-        m_leftIn.set(true);
-        m_rightIn.set(true);
-        m_leftOut.set(false);
-        m_rightOut.set(false);     
+    // public void actuate(){
+    //     m_leftIn.set(true);
+    //     m_rightIn.set(true);
+    //     m_leftOut.set(false);
+    //     m_rightOut.set(false);     
+    // }
+
+    // //TODO: Release Solenoid input off, output on
+
+    // public void release(){
+    //     m_leftIn.set(false);
+    //     m_rightIn.set(false);
+    //     m_leftOut.set(true);
+    //     m_rightOut.set(true);   
+    // }
+
+    public void setElevatorSpeed(double speed){
+        if(speed > -0.01 && speed < 0.01){
+          speed = 0;
+        }
+        m_elevatorGroup.set(-speed);
     }
-
-    //TODO: Release Solenoid input off, output on
-
-    public void release(){
-        m_leftIn.set(false);
-        m_rightIn.set(false);
-        m_leftOut.set(true);
-        m_rightOut.set(true);   
-    }
-
      public Command exampleMethodCommand() {
     // Inline construction of command goes here.
     // Subsystem::RunOnce implicitly requires `this` subsystem.

@@ -7,20 +7,21 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DefaultDriveCommand;
+import frc.robot.commands.IntakeDisableGripCommand;
 import frc.robot.commands.IntakeExtendCommand;
+import frc.robot.commands.IntakeGripCommand;
 import frc.robot.commands.ActuateElevatorCommand;
-import frc.robot.commands.ReleaseElevatorCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeExtendCommand;
-import frc.robot.commands.IntakeRetractCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -36,31 +37,31 @@ public class RobotContainer {
   public static final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
 
   private static CommandXboxController  driver;
-  private static Trigger lButton;
-  private static Trigger rButton;
-  private static Trigger aButton;
-  private static Trigger yButton; 
+  private static CommandPS4Controller driver2;
+  private static Trigger xButton;
+  private static Trigger triangleButton;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.DRIVER1CONTROLLERPORT);
-  
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
     driver = new CommandXboxController(OperatorConstants.DRIVER1CONTROLLERPORT);
+    driver2 = new CommandPS4Controller(OperatorConstants.DRIVER2CONTROLLERPORT);
     CommandScheduler.getInstance().setDefaultCommand(m_driveSubsystem, new DefaultDriveCommand(m_driveSubsystem));
-    lButton = driver.leftBumper().whileTrue(new ActuateElevatorCommand(m_elevatorSubsystem));
-    rButton = driver.rightBumper().whileTrue(new ReleaseElevatorCommand(m_elevatorSubsystem));
-    yButton = driver.y().whileTrue(new IntakeExtendCommand(m_intakeSubsystem));
-    aButton = driver.y().whileTrue(new IntakeExtendCommand(m_intakeSubsystem));
+    CommandScheduler.getInstance().setDefaultCommand(m_elevatorSubsystem, new ActuateElevatorCommand(m_elevatorSubsystem));
+    CommandScheduler.getInstance().setDefaultCommand(m_intakeSubsystem, new IntakeExtendCommand(m_intakeSubsystem));
+    xButton = driver2.cross().whileTrue(new IntakeGripCommand(m_intakeSubsystem));
+    triangleButton = driver2.triangle().whileTrue(new IntakeDisableGripCommand(m_intakeSubsystem) );
 
-    yButton.onTrue(new IntakeExtendCommand(m_intakeSubsystem)); 
-    aButton.onTrue(new IntakeRetractCommand(m_intakeSubsystem));
-    lButton.onTrue(new ActuateElevatorCommand(m_elevatorSubsystem));
-    rButton.onTrue(new ReleaseElevatorCommand(m_elevatorSubsystem));
+
+    xButton.onTrue(new IntakeGripCommand(m_intakeSubsystem));
+    triangleButton.onTrue(new IntakeDisableGripCommand(m_intakeSubsystem));
+    // yButton.onTrue(new IntakeExtendCommand(m_intakeSubsystem)); 
+    // aButton.onTrue(new IntakeRetractCommand(m_intakeSubsystem));
+    // lButton.onTrue(new ActuateElevatorCommand(m_elevatorSubsystem));
+    // rButton.onTrue(new ReleaseElevatorCommand(m_elevatorSubsystem));
   }
 
   /**
@@ -79,12 +80,16 @@ public class RobotContainer {
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_driverController.y().whileTrue(m_driveSubsystem.exampleMethodCommand());
+    // m_driverController.y().whileTrue(m_driveSubsystem.exampleMethodCommand());
   }
   
 
   public static CommandXboxController getDriverController() {
     return driver;
+  }
+
+  public static CommandPS4Controller getDriverController2() {
+    return driver2;
   }
   
   /**

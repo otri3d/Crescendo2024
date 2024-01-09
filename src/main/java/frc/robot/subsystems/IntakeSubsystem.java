@@ -42,31 +42,42 @@ public class IntakeSubsystem extends SubsystemBase {
           /* one-time action goes here */
         });
   }
-  
 
-  public void toggleGripperVelocty(){
-    if(encoder.get() != 0){
-        m_gripper.set(0);
-    }
-    if(encoder.get() == 0){
-        m_gripper.set(1);
-    }    
-  }
-  public void setIntakePosition(double position){
-    if(encoder.getDistance() == position){
-      m_intake.set(0);
-    } 
-    else if(encoder.getDistance() < position){
-      m_intake.set(1);
-    } 
-    else if(encoder.getDistance() > position){
-      m_intake.set(-1);
-    }
+  public void setIntakeSpeed(double speed){
+    m_intake.set(speed);
   }
 
-  public Encoder getEncoder(){
-    return encoder;
+  public void enableGripper(){
+    m_gripper.set(1);
   }
+
+  public void disableGripper(){
+    m_gripper.set(0);
+  }
+  // public void toggleGripperVelocty(){
+  //   if(encoder.get() != 0){
+  //       m_gripper.set(0);
+  //   }
+  //   if(encoder.get() == 0){
+  //       m_gripper.set(1);
+  //   }    
+  // }
+  public void setIntakePosition(double speed){
+    m_intake.set(speed);
+    // if(encoder.getDistance() == position){
+    //   m_intake.set(0);
+    // } 
+    // else if(encoder.getDistance() < position){
+    //   m_intake.set(1);
+    // } 
+    // else if(encoder.getDistance() > position){
+    //   m_intake.set(-1);
+    // }
+  }
+
+  // public Encoder getEncoder(){
+  //   return encoder;
+  // }
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
    *

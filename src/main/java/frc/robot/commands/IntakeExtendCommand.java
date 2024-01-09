@@ -24,7 +24,7 @@ public class IntakeExtendCommand extends CommandBase{
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-      m_subsystem.setIntakePosition(100);
+      m_subsystem.setIntakePosition(m_controller.getLeftY());
     }
 
     // Called once the command ends or is interrupted.
