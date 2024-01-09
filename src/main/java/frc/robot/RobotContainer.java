@@ -7,6 +7,8 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DefaultDriveCommand;
+import frc.robot.commands.FlywheelCommand;
+import frc.robot.commands.FlywheelDisableCommand;
 import frc.robot.commands.IntakeDisableGripCommand;
 import frc.robot.commands.IntakeExtendCommand;
 import frc.robot.commands.IntakeGripCommand;
@@ -14,6 +16,7 @@ import frc.robot.commands.ActuateElevatorCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
@@ -35,11 +38,14 @@ public class RobotContainer {
   public static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   public static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   public static final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+  public static final ShooterSubsystem m_shootersubsystem = new ShooterSubsystem();
 
   private static CommandXboxController  driver;
   private static CommandPS4Controller driver2;
   private static Trigger xButton;
   private static Trigger triangleButton;
+  private static Trigger rtrigger;
+
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   
@@ -54,10 +60,13 @@ public class RobotContainer {
     CommandScheduler.getInstance().setDefaultCommand(m_intakeSubsystem, new IntakeExtendCommand(m_intakeSubsystem));
     xButton = driver2.cross().whileTrue(new IntakeGripCommand(m_intakeSubsystem));
     triangleButton = driver2.triangle().whileTrue(new IntakeDisableGripCommand(m_intakeSubsystem) );
+    rtrigger = driver.rightTrigger(0.5).whileTrue(new FlywheelCommand(m_shootersubsystem));
 
 
     xButton.onTrue(new IntakeGripCommand(m_intakeSubsystem));
     triangleButton.onTrue(new IntakeDisableGripCommand(m_intakeSubsystem));
+    rtrigger.onTrue(new FlywheelCommand(m_shootersubsystem));
+    rtrigger.onFalse(new FlywheelDisableCommand(m_shootersubsystem));
     // yButton.onTrue(new IntakeExtendCommand(m_intakeSubsystem)); 
     // aButton.onTrue(new IntakeRetractCommand(m_intakeSubsystem));
     // lButton.onTrue(new ActuateElevatorCommand(m_elevatorSubsystem));
