@@ -12,9 +12,12 @@ import frc.robot.commands.FlywheelDisableCommand;
 import frc.robot.commands.IntakeDisableGripCommand;
 import frc.robot.commands.IntakeExtendCommand;
 import frc.robot.commands.IntakeGripCommand;
+import frc.robot.commands.RampDeployment;
+import frc.robot.commands.RampRetractment;
 import frc.robot.commands.ActuateElevatorCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.RampSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
@@ -39,11 +42,14 @@ public class RobotContainer {
   public static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   public static final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   public static final ShooterSubsystem m_shootersubsystem = new ShooterSubsystem();
+  public static final RampSubsystem m_rampSubsystem = new RampSubsystem();
 
   private static CommandXboxController  driver;
   private static CommandPS4Controller driver2;
-  private static Trigger xButton;
+  private static Trigger crossButton;
   private static Trigger triangleButton;
+  private static Trigger circleButton;
+  private static Trigger squareButton;
   private static Trigger rtrigger;
 
 
@@ -58,13 +64,19 @@ public class RobotContainer {
     CommandScheduler.getInstance().setDefaultCommand(m_driveSubsystem, new DefaultDriveCommand(m_driveSubsystem));
     CommandScheduler.getInstance().setDefaultCommand(m_elevatorSubsystem, new ActuateElevatorCommand(m_elevatorSubsystem));
     CommandScheduler.getInstance().setDefaultCommand(m_intakeSubsystem, new IntakeExtendCommand(m_intakeSubsystem));
-    xButton = driver2.cross().whileTrue(new IntakeGripCommand(m_intakeSubsystem));
-    triangleButton = driver2.triangle().whileTrue(new IntakeDisableGripCommand(m_intakeSubsystem) );
+    crossButton = driver2.cross().whileTrue(new RampRetractment(m_rampSubsystem));
+    triangleButton = driver2.triangle().whileTrue(new RampDeployment(m_rampSubsystem) );
+    squareButton = driver2.square().whileTrue(new IntakeDisableGripCommand(m_intakeSubsystem));
+    circleButton = driver2.circle().whileTrue(new IntakeGripCommand(m_intakeSubsystem));
     rtrigger = driver.rightTrigger(0.5).whileTrue(new FlywheelCommand(m_shootersubsystem));
+   
 
 
-    xButton.onTrue(new IntakeGripCommand(m_intakeSubsystem));
-    triangleButton.onTrue(new IntakeDisableGripCommand(m_intakeSubsystem));
+
+    crossButton.onTrue(new RampRetractment(m_rampSubsystem));
+    triangleButton.onTrue(new RampDeployment(m_rampSubsystem));
+    squareButton.onTrue(new IntakeDisableGripCommand(m_intakeSubsystem));
+    circleButton.onTrue(new IntakeGripCommand(m_intakeSubsystem));
     rtrigger.onTrue(new FlywheelCommand(m_shootersubsystem));
     rtrigger.onFalse(new FlywheelDisableCommand(m_shootersubsystem));
     // yButton.onTrue(new IntakeExtendCommand(m_intakeSubsystem)); 

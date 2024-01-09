@@ -15,12 +15,13 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class ElevatorSubsystem extends SubsystemBase {
     // private Solenoid m_leftIn, m_leftOut, m_rightIn, m_rightOut;
+    // private Solenoid m_solenoid;
     private WPI_VictorSPX m_elevatorMotor1, m_elevatorMotor2;
     private MotorControllerGroup m_elevatorGroup;
 
     public ElevatorSubsystem(){
         //Solenoid
-        // m_leftIn = new Solenoid(PneumaticsModuleType.CTREPCM, PCMConstants.LEFTINPUTPORT);
+        // m_solenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.PCMConstants.INTAKEEXTEND);
         // m_rightIn = new Solenoid(PneumaticsModuleType.CTREPCM,PCMConstants.RIGHTINPUTPORT);
         // m_leftOut = new Solenoid(PneumaticsModuleType.CTREPCM, PCMConstants.LEFTOUTPUTPORT);
         // m_rightOut = new Solenoid(PneumaticsModuleType.CTREPCM, PCMConstants.RIGHTOUTPUTPORT);

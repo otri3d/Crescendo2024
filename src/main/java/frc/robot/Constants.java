@@ -38,8 +38,9 @@ public final class Constants {
 
   public static class PCMConstants{
     public static final int LEFTINPUTPORT = 0;
-    public static final int RIGHTINPUTPORT = 1;
-    public static final int LEFTOUTPUTPORT = 2;
+    public static final int LEFTOUTPUTPORT = 1;
+    public static final int RIGHTINPUTPORT = 2;
     public static final int RIGHTOUTPUTPORT= 3;
+      // public static final int INTAKEEXTEND = 4;
   }
 }

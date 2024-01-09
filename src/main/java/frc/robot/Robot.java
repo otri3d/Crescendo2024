@@ -20,6 +20,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private DriveSubsystem m_driveSubsystem = RobotContainer.m_driveSubsystem;
   private IntakeSubsystem m_intakeSubsystem = RobotContainer.m_intakeSubsystem;
+  private RampSubsystem m_rampSubsystem = RobotContainer.m_rampSubsystem;
   
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -36,6 +37,8 @@ public class Robot extends TimedRobot {
     m_intakeSubsystem.setIntakePosition(0);
     m_driveSubsystem.setLeftSpeed(0);
     m_driveSubsystem.setRightSpeed(0);
+    m_rampSubsystem.decompressSolenoid();
+    
   }
 
   /**
