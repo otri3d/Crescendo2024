@@ -74,7 +74,7 @@ public class RobotContainer {
     xButton = driver.x();
     yButton = driver.y();
     rightBumper = driver.rightBumper();
-    rtrigger = driver.rightTrigger(0.5);
+    rtrigger = driver.rightTrigger(0.1 );
 
     crossButton.onTrue(new RampRetractment(m_rampSubsystem));
     triangleButton.onTrue(new RampDeployment(m_rampSubsystem));
@@ -84,12 +84,6 @@ public class RobotContainer {
     rtrigger.onFalse(new FlywheelDisableCommand(m_shootersubsystem));
     leftBumper.onTrue(new ActuateIntakeChain(m_intakeSubsystem));
     xButton.onTrue(new DisableIntakeChain(m_intakeSubsystem));
-
-
-    // yButton.onTrue(new IntakeExtendCommand(m_intakeSubsystem)); 
-    // aButton.onTrue(new IntakeRetractCommand(m_intakeSubsystem));
-    // lButton.onTrue(new ActuateElevatorCommand(m_elevatorSubsystem));
-    // rButton.onTrue(new ReleaseElevatorCommand(m_elevatorSubsystem));
   }
 
   /**

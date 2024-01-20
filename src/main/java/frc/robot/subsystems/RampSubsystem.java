@@ -14,11 +14,11 @@ public class RampSubsystem extends SubsystemBase {
         m_ramp = new WPI_VictorSPX(OperatorConstants.INTAKE_RAMP);
     }
 
-    public void actuateRamp(){
+    public void retractRamp(){
       m_ramp.set(1);
     }
 
-    public void disableRamp(){
+    public void deployRamp(){
       m_ramp.set(0);
     }
     /**

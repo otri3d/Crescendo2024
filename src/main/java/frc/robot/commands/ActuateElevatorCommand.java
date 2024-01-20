@@ -17,7 +17,7 @@ public class ActuateElevatorCommand extends CommandBase{
         addRequirements(subsystem);
     }
 
-    // Called when the command is initially scheduled.
+    // Called when the command is initially swheduled.
     @Override
     public void initialize() {
       

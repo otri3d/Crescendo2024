@@ -24,7 +24,7 @@ public class RampDeployment extends CommandBase{
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-      m_subsystem.disableRamp();
+      m_subsystem.deployRamp();
     }
 
     // Called once the command ends or is interrupted.
