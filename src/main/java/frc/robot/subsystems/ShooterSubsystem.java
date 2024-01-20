@@ -6,23 +6,22 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import frc.robot.Constants.OperatorConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
-    private WPI_VictorSPX m_LeftFlywheel , m_RightFlywheel, m_BottomFlyWheel;
+    private WPI_VictorSPX m_LeftFlywheel , m_LeftFlywheel2;
     private MotorControllerGroup m_shooter;
     public ShooterSubsystem(){
         m_LeftFlywheel = new WPI_VictorSPX(OperatorConstants.LEFTFLYWHEEL);
-        m_RightFlywheel = new WPI_VictorSPX(OperatorConstants.RIGHTFLYWHEEL);
-        m_BottomFlyWheel = new WPI_VictorSPX(OperatorConstants.BOTTOMFLYWHEEL);
-        m_shooter = new MotorControllerGroup(m_LeftFlywheel, m_RightFlywheel);
+        m_LeftFlywheel2 = new WPI_VictorSPX(OperatorConstants.LEFTFLYWHEEL2);
+        m_shooter = new MotorControllerGroup(m_LeftFlywheel, m_LeftFlywheel2);
     }
 
     public void actuatemotor(){
         m_shooter.set(1);
-        m_BottomFlyWheel.set(1);
+        // m_BottomFlyWheel.set(1);
     }
 
     public void disablemotor(){
       m_shooter.set(0);
-      m_BottomFlyWheel.set(0);
+      // m_BottomFlyWheel.set(0);
     }
     /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).

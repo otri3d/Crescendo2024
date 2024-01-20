@@ -34,10 +34,9 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     // m_intakeSubsystem.getEncoder().reset();
     // m_intakeSubsystem.getEncoder().setDistancePerPulse(1.0/2048.0);
-    m_intakeSubsystem.setIntakePosition(0);
+    // m_intakeSubsystem.setIntakePosition(0);
     m_driveSubsystem.setLeftSpeed(0);
     m_driveSubsystem.setRightSpeed(0);
-    m_rampSubsystem.decompressSolenoid();
     
   }
 

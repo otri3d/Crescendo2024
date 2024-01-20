@@ -7,22 +7,26 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import java.lang.management.OperatingSystemMXBean;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants;
 import frc.robot.Constants.InputConstants;
 public class IntakeSubsystem extends SubsystemBase {
 
-    private WPI_VictorSPX m_intakearm1, m_intakearm2, m_gripper;
-    private MotorControllerGroup m_intake;
+    private WPI_VictorSPX m_intake, m_gripper, m_intakechain, m_intakeramp;
     private Encoder encoder;
   /** Creates a new ExampleSubsystem. */
     public IntakeSubsystem(){
-        m_intakearm1 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT5);
-        m_intakearm2 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT6);
-        m_intake = new MotorControllerGroup(m_intakearm1,m_intakearm2);
-        m_gripper = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT7);
+        // m_intakearm1 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT5);
+        // m_intakearm2 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT6);
+        m_intakeramp = new WPI_VictorSPX(OperatorConstants.INTAKE_RAMP);
+        m_gripper = new WPI_VictorSPX(OperatorConstants.INTAKE);
+        m_intakechain = new WPI_VictorSPX(OperatorConstants.INTAKE_CHAIN);
         encoder = new Encoder(InputConstants.ENCODERDIO1, InputConstants.ENCODERDIO2, false, Encoder.EncodingType.k2X);
     }
 
@@ -51,6 +55,14 @@ public class IntakeSubsystem extends SubsystemBase {
   public void disableGripper(){
     m_gripper.set(0);
   }
+
+  public void enableIntakeChain(){
+    m_intakechain.set(1);
+  }
+
+  public void disableIntakeChain(){
+    m_intakechain.set(0);
+  }
   // public void toggleGripperVelocty(){
   //   if(encoder.get() != 0){
   //       m_gripper.set(0);
@@ -59,18 +71,18 @@ public class IntakeSubsystem extends SubsystemBase {
   //       m_gripper.set(1);
   //   }    
   // }
-  public void setIntakePosition(double speed){
-    m_intake.set(speed);
-    // if(encoder.getDistance() == position){
-    //   m_intake.set(0);
-    // } 
-    // else if(encoder.getDistance() < position){
-    //   m_intake.set(1);
-    // } 
-    // else if(encoder.getDistance() > position){
-    //   m_intake.set(-1);
-    // }
-  }
+  // public void setIntakePosition(double speed){
+  //   m_intake.set(speed);
+  //   if(encoder.getDistance() == position){
+  //     m_intake.set(0);
+  //   } 
+  //   else if(encoder.getDistance() < position){
+  //     m_intake.set(1);
+  //   } 
+  //   else if(encoder.getDistance() > position){
+  //     m_intake.set(-1);
+  //   }
+  // }
 
   // public Encoder getEncoder(){
   //   return encoder;

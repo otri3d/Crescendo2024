@@ -26,7 +26,7 @@ public class ActuateElevatorCommand extends CommandBase{
     // Called every time the scheduler runs while the command is scheduled. Hold B to activate 
     @Override
     public void execute() {
-      m_subsystem.setElevatorSpeed(m_controller2.getRightY()*DriveConstants.ACCELERATION_CONSTANT);
+      m_subsystem.setElevatorSpeed(m_controller2.getRightY() * DriveConstants.ELEVATOR_ACCELERATION_CONSTANT);
     }
 
     // Called once the command ends or is interrupted.

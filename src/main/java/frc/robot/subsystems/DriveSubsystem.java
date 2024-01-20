@@ -18,9 +18,9 @@ public class DriveSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   public DriveSubsystem() {
     m_left1 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT1);
-    m_left2 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT2);
+    m_left2 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT4);
     m_right1 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT3);
-    m_right2 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT4);
+    m_right2 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT2);
 
     m_left = new MotorControllerGroup(m_left1, m_left2);
     m_right = new MotorControllerGroup(m_right1, m_right2);
@@ -41,11 +41,11 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void setLeftSpeed(double speed) {
-    m_left.set(speed);
+    m_left.set(-speed);
   }
 
   public void setRightSpeed(double speed) {
-    m_right.set(speed);
+    m_right.set(-speed);
     
   }
   public void setAcceleratingLeftMotors(double leftStickInput)

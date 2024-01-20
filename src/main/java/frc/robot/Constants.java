@@ -20,16 +20,16 @@ public final class Constants {
     public static final int MOTORCONTROLPORT2 = 2;
     public static final int MOTORCONTROLPORT3 = 3;
     public static final int MOTORCONTROLPORT4 = 4;
-    public static final int MOTORCONTROLPORT5 = 5;
-    public static final int MOTORCONTROLPORT6 = 6;
-    public static final int MOTORCONTROLPORT7 = 7;
-    public static final int MOTORCONTROLPORT8 = 8;
-    public static final int RIGHTFLYWHEEL = 9;
-    public static final int LEFTFLYWHEEL = 10;
-    public static final int BOTTOMFLYWHEEL = 11;
+    public static final int LEFTFLYWHEEL = 5;
+    public static final int LEFTFLYWHEEL2 = 6;
+    public static final int ELEVATOR = 7;
+    public static final int INTAKE = 8;
+    public static final int INTAKE_RAMP = 9;
+    public static final int INTAKE_CHAIN = 10;
   }
   public static class DriveConstants {
-    public static final double ACCELERATION_CONSTANT = 0.04  ;
+    public static final double ACCELERATION_CONSTANT = 0.01;
+    public static final double ELEVATOR_ACCELERATION_CONSTANT = 0.7;
   }
   public static class InputConstants {
     public static final int ENCODERDIO1 = 9;

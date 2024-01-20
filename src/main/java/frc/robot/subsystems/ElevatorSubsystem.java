@@ -16,8 +16,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 public class ElevatorSubsystem extends SubsystemBase {
     // private Solenoid m_leftIn, m_leftOut, m_rightIn, m_rightOut;
     // private Solenoid m_solenoid;
-    private WPI_VictorSPX m_elevatorMotor1, m_elevatorMotor2;
-    private MotorControllerGroup m_elevatorGroup;
+    private WPI_VictorSPX m_elevatorMotor;
 
     public ElevatorSubsystem(){
         //Solenoid
@@ -25,9 +24,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         // m_rightIn = new Solenoid(PneumaticsModuleType.CTREPCM,PCMConstants.RIGHTINPUTPORT);
         // m_leftOut = new Solenoid(PneumaticsModuleType.CTREPCM, PCMConstants.LEFTOUTPUTPORT);
         // m_rightOut = new Solenoid(PneumaticsModuleType.CTREPCM, PCMConstants.RIGHTOUTPUTPORT);
-        m_elevatorMotor1 = new WPI_VictorSPX(Constants.OperatorConstants.MOTORCONTROLPORT7);
-        m_elevatorMotor2 = new WPI_VictorSPX(Constants.OperatorConstants.MOTORCONTROLPORT8);
-        m_elevatorGroup = new MotorControllerGroup(m_elevatorMotor1, m_elevatorMotor2);
+        m_elevatorMotor = new WPI_VictorSPX(Constants.OperatorConstants.ELEVATOR);
     }
 
     //4 single ones on each side, Default input off, output on
@@ -54,7 +51,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         if(speed > -0.01 && speed < 0.01){
           speed = 0;
         }
-        m_elevatorGroup.set(-speed);
+        m_elevatorMotor.set(-speed);
     }
      public Command exampleMethodCommand() {
     // Inline construction of command goes here.

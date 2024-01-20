@@ -45,7 +45,7 @@ public class DefaultDriveCommand extends CommandBase {
     }
     else{
       m_subsystem.setAcceleratingLeftMotors(1*(m_controller.getLeftY()+m_controller.getLeftX()));
-      m_subsystem.setAcceleratingRightMotors(-1*(m_controller.getLeftY()-m_controller.getLeftX()));
+      m_subsystem.setAcceleratingRightMotors(1*(m_controller.getLeftY()-m_controller.getLeftX()));
       // m_subsystem.setAcceleratingLeftMotors(m_controller.getLeftY());
       // m_subsystem.setAcceleratingRightMotors(m_controller.getRightY());
     }
