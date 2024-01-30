@@ -17,10 +17,10 @@ public class DriveSubsystem extends SubsystemBase {
   private double m_speed1 = 0.0, m_speed2 = 0.0;
   /** Creates a new ExampleSubsystem. */
   public DriveSubsystem() {
-    m_left1 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT1);
-    m_left2 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT4);
-    m_right1 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT3);
-    m_right2 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT2);
+    m_left1 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT3);
+    m_left2 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT2);
+    m_right1 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT1);
+    m_right2 = new WPI_VictorSPX(OperatorConstants.MOTORCONTROLPORT4);
 
     m_left = new MotorControllerGroup(m_left1, m_left2);
     m_right = new MotorControllerGroup(m_right1, m_right2);

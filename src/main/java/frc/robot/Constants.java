@@ -28,7 +28,7 @@ public final class Constants {
     public static final int INTAKE_CHAIN = 10;
   }
   public static class DriveConstants {
-    public static final double ACCELERATION_CONSTANT = 0.01;
+    public static final double ACCELERATION_CONSTANT = 0.04;
     public static final double ELEVATOR_ACCELERATION_CONSTANT = 0.7;
   }
   public static class InputConstants {

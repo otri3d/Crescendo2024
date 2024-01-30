@@ -10,6 +10,7 @@ import frc.robot.commands.DefaultDriveCommand;
 import frc.robot.commands.DisableIntakeChain;
 import frc.robot.commands.FlywheelCommand;
 import frc.robot.commands.FlywheelDisableCommand;
+import frc.robot.commands.FlywheelReverseCommand;
 import frc.robot.commands.IntakeDisableGripCommand;
 import frc.robot.commands.IntakeExtendCommand;
 import frc.robot.commands.IntakeGripCommand;
@@ -52,6 +53,7 @@ public class RobotContainer {
   private static Trigger triangleButton;
   private static Trigger rightBumper;
   private static Trigger leftBumper;
+  public static Trigger ltrigger;
   private static Trigger xButton;
   private static Trigger yButton;
   private static Trigger rtrigger;
@@ -75,6 +77,7 @@ public class RobotContainer {
     yButton = driver.y();
     rightBumper = driver.rightBumper();
     rtrigger = driver.rightTrigger(0.1 );
+    ltrigger = driver.leftTrigger(0.1 );
 
     crossButton.onTrue(new RampRetractment(m_rampSubsystem));
     triangleButton.onTrue(new RampDeployment(m_rampSubsystem));
@@ -82,6 +85,8 @@ public class RobotContainer {
     rightBumper.onTrue(new IntakeGripCommand(m_intakeSubsystem));
     rtrigger.onTrue(new FlywheelCommand(m_shootersubsystem));
     rtrigger.onFalse(new FlywheelDisableCommand(m_shootersubsystem));
+    ltrigger.onTrue(new FlywheelReverseCommand(m_shootersubsystem));
+    ltrigger.onFalse(new FlywheelDisableCommand(m_shootersubsystem));
     leftBumper.onTrue(new ActuateIntakeChain(m_intakeSubsystem));
     xButton.onTrue(new DisableIntakeChain(m_intakeSubsystem));
   }

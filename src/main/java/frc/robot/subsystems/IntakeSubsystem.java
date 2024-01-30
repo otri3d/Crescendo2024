@@ -49,7 +49,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void enableGripper(){
-    m_gripper.set(1);
+    m_gripper.set(-1);
   }
 
   public void disableGripper(){

@@ -20,9 +20,14 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void disablemotor(){
-      m_shooter.set(0);
+        m_shooter.set(0);
       // m_BottomFlyWheel.set(0);
     }
+
+    public void reverseMotor(){
+        m_shooter.set(-0.4);
+      // m_BottomFlyWheel.set(0);
+    }    
     /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
    *
