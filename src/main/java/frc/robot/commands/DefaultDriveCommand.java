@@ -5,16 +5,15 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.DriveSubsystem;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.RobotContainer;
 
 /** An example command that uses an example subsystem. */
 public class DefaultDriveCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DriveSubsystem m_subsystem;
-  private final XboxController m_controller = RobotContainer.getDriverController();
+  private final CommandXboxController m_controller = RobotContainer.getDriverController();
   private boolean modeSwitch = false;
 
   /**
@@ -37,7 +36,7 @@ public class DefaultDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_controller.getXButtonPressed()){
+    if(m_controller.a().getAsBoolean()){
       modeSwitch = !modeSwitch;
     }
     if(!modeSwitch){
@@ -45,7 +44,7 @@ public class DefaultDriveCommand extends CommandBase {
       m_subsystem.setRightSpeed(m_controller.getRightY());
     }
     else{
-      m_subsystem.setAcceleratingLeftMotors(1*(m_controller.getLeftY()+m_controller.getLeftX()));
+      m_subsystem.setAcceleratingLeftMotors(-1*(m_controller.getLeftY()+m_controller.getLeftX()));
       m_subsystem.setAcceleratingRightMotors(-1*(m_controller.getLeftY()-m_controller.getLeftX()));
       // m_subsystem.setAcceleratingLeftMotors(m_controller.getLeftY());
       // m_subsystem.setAcceleratingRightMotors(m_controller.getRightY());

@@ -1,6 +1,21 @@
 {
   "HALProvider": {
     "Other Devices": {
+      "Compressor[0]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Victor SPX[10]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Victor SPX[11]": {
+        "header": {
+          "open": true
+        }
+      },
       "Victor SPX[1]": {
         "header": {
           "open": true
@@ -20,6 +35,36 @@
         "header": {
           "open": true
         }
+      },
+      "Victor SPX[5]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Victor SPX[6]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Victor SPX[7]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Victor SPX[8]": {
+        "header": {
+          "open": true
+        }
+      }
+    },
+    "Solenoids": {
+      "0": {
+        "header": {
+          "open": true
+        }
+      },
+      "window": {
+        "visible": true
       }
     }
   },
@@ -28,7 +73,10 @@
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/Ungrouped/MotorControllerGroup[1]": "Motor Controller",
       "/LiveWindow/Ungrouped/MotorControllerGroup[2]": "Motor Controller",
-      "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
+      "/LiveWindow/Ungrouped/MotorControllerGroup[3]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/Victor SPX [7]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Victor SPX [8]": "Motor Controller"
     }
   }
 }
